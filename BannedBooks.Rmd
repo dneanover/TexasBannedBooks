@@ -30,13 +30,14 @@ book_list <- read_excel("/Users/dneanover/Downloads/krausebooklist.xlsx") %>%
 
 Below is a look at the distribution of the banned books by year.
 
-```{r year, echo=FALSE, warning=FALSE}
+```{r year, echo=FALSE, warning=FALSE, fig.align="center"}
 ggplot(book_list)+
   geom_bar(aes(x=year), fill="dodgerblue")+
   labs(x="Publishing Year", y="Books Banned", title="Banned Books on the Krause List by Year", subtitle= "The 850 Books on the Krause List")+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5, size=16, face="bold"),
-        plot.subtitle = element_text(hjust =0.5, size=12))
+        plot.subtitle = element_text(hjust =0.5, size=12),
+        axis.title = element_text(size=12, face="bold"))
 ```
 
 The data shows that Krause is primarily concerned with books that were published in the last decade, with 578 (68%) of the books published in 2010 or later.  Only two books were banned before 1980, one from the 60s by Michael Crichton, and the other from the 70s by Andrea Boroff Eagan.
@@ -52,15 +53,16 @@ authors <- book_list %>%
   arrange(desc(bans))
 ```
 
-```{r authors_chart, warning=FALSE, echo=FALSE}
+```{r authors_chart, warning=FALSE, echo=FALSE, fig.align="center"}
 ggplot(authors, aes(x=bans))+
     geom_bar( fill="dodgerblue")+
 stat_count(geom = "text", colour = "black", size = 3.5,
-  aes(label = ..count..), position=position_stack(vjust=1.01))+
+  aes(label = ..count..), position=position_stack(vjust=1.025))+
   labs(x="Number of Authors' Books Banned", y="Number of Authors", title="Number of Author's Books Banned", subtitle= "The 850 Books on the Krause List")+
   theme_bw()+
-  theme(plot.title = element_text(hjust = 0.5, size=16),
-        plot.subtitle = element_text(hjust =0.5, size=14))+
+  theme(plot.title = element_text(hjust = 0.5, size=16, face="bold"),
+        plot.subtitle = element_text(hjust =0.5, size=12),
+        axis.title = element_text(size=12, face="bold"))+
   scale_x_continuous(breaks=seq(0,10,1))
 ```
 
